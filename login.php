@@ -8,9 +8,9 @@ $exec = mysqli_query($conn,$query);
 $no_rows = mysqli_num_rows($exec);
 if($no_rows>=1) {
     // echo "Success";
-    $_SESSION['email'] = $email;
-    header("Location: details.php");
+	$_SESSION['email'] = $email;
+	header("Location: details.php");
 } else {
-    echo "Wrong credentials";
+	echo "Wrong credentials";
 }
 ?>

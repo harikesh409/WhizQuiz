@@ -3,7 +3,7 @@ require_once('config.php');
 ?>
 <!doctype html>
 <html lang="en">
-  <head>
+<head>
 	<!-- Required meta tags -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -12,67 +12,133 @@ require_once('config.php');
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 	<link rel="stylesheet" href="styles.css">
 	<title>Quiz</title>
-  </head>
-  <body>
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">
-  <img src="images/lendi.png" alt="lendi" width="100" height="80">
-  </a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-	<span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-	<ul class="navbar-nav mr-auto">
-	  <li class="nav-item active">
-		<a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
-	  </li>
-	</ul>
-    <button class="btn btn-outline-success my-2 my-sm-0" type="button"> <a href="logout.php">Log Out</a></button>  
+</head>
+<body>
+  <?php 
+  include "navbar.php"; 
+  if(!isset($_SESSION['email'])) {
+    header("Location:index.php");
+  } else {
+    $email = $_SESSION['email'];
+    $query2 = "SELECT * from users where email='$email'";
+    $exec2 = mysqli_query($conn,$query2);
+    $row = mysqli_fetch_array($exec2);
+    if(!strcmp($row['isSubmitted'], "1")) {
+      die("<h2 class='text-danger text-center mt-5 display-3'>Quiz already submitted</h2>");
+    }
+  }
+  ?>
+  <div id="overlay">
+    <div class="card mx-auto text-center" style="width: 18rem;margin-top: 25%">
+      <div class="card-body">
+        <h3>Are you sure?</h3>
+        <div class="p-3">
+          <button class="btn btn-secondary" onclick="cancel()">Cancel</button>
+          <button class="btn btn-primary" onclick="submitTest()">Damn Sure</button>
+        </div>
+      </div>
+    </div>
   </div>
-</nav>
-<div class="container">
-    <form action="result.php" method="post" class="mt-4" onsubmit="return onSubmit();">
+  <div class="container">
+    <div class="row mt-3">
+      <div class="col-md-8">
+        <h2>Tech Whiz Quiz Round 1</h2>
+      </div>
+      <div class="col-md-*">
+       <!--  <div id="countdowntimer"><span class="px-3" id="ms_timer"></span></div> -->
+       <div id="countdown"></div>
+       <div class="count"></div>
+     </div>
+   </div>
+   <hr>
+   <form action="result.php" method="post" class="mt-4">
     <?php 
-        $query = "SELECT * FROM questions ORDER BY RAND()";
-        $exec = mysqli_query($conn,$query) or die('error');
+    $query = "SELECT * FROM questions ORDER BY RAND()";
+    $exec = mysqli_query($conn,$query) or die('error');
+    $i=1;
     while($row=mysqli_fetch_assoc($exec)) {
-        echo '<div class="card">';
-        echo '<div class="card-body">';
-        echo "<h5 class='card-title'>".$row['question']."</h5>";
-        echo "<input type='radio' name='q".$row['qid']."' id='".$row['qid']."q1' value=".$row['option1'].">";
-        echo "<label for='".$row['qid']."q1' class='ml-2'>".$row['option1']."</label>";
-        echo "<br>";
-        echo "<input type='radio' name='q".$row['qid']."' id='".$row['qid']."q2' value=".$row['option2'].">";
-        echo "<label for='".$row['qid']."q2' class='ml-2'>".$row['option2']."</label>";
-        echo "<br>";
-        echo "<input type='radio' name='q".$row['qid']."' id='".$row['qid']."q3' value=".$row['option3'].">";
-        echo "<label for='".$row['qid']."q3' class='ml-2'>".$row['option3']."</label>";
-        echo "<br>";
-        echo "<input type='radio' name='q".$row['qid']."' id='".$row['qid']."q4' value=".$row['option4'].">";
-        echo "<label for='".$row['qid']."q4' class='ml-2'>".$row['option4']."</label>";
-        echo "<br>";
-        echo '</div>';
-        echo '</div>';
-        echo '<br>';
+      echo '<div class="card">';
+      echo '<div class="card-body">';
+      echo "<h5 class='card-title'>".$i++.". ".$row['question']."</h5>";
+      echo "<div class='row'>";
+      echo "<div class='col-6 inputGroup'>";
+      echo "<input type='radio' name='q".$row['qid']."' id='".$row['qid']."q1' value=".$row['option1'].">";
+      echo "<label for='".$row['qid']."q1' class='ml-2'>".$row['option1']."</label>";
+        // echo "<br>";
+      echo "</div>";
+      echo "<div class='col-6 inputGroup'>";
+      echo "<input type='radio' name='q".$row['qid']."' id='".$row['qid']."q2' value=".$row['option2'].">";
+      echo "<label for='".$row['qid']."q2' class='ml-2'>".$row['option2']."</label>";
+        // echo "<br>";
+      echo "</div></div>";
+      echo "<div class='row'>";
+      echo "<div class='col-6 inputGroup'>";
+      echo "<input type='radio' name='q".$row['qid']."' id='".$row['qid']."q3' value=".$row['option3'].">";
+      echo "<label for='".$row['qid']."q3' class='ml-2'>".$row['option3']."</label>";
+        // echo "<br>";
+      echo "</div>";
+      echo "<div class='col-6 inputGroup'>";
+      echo "<input type='radio' name='q".$row['qid']."' id='".$row['qid']."q4' value=".$row['option4'].">";
+      echo "<label for='".$row['qid']."q4' class='ml-2'>".$row['option4']."</label>";
+      echo "</div></div>";
+        // echo "<br>";
+      echo '</div>';
+      echo '</div>';
+      echo '<br>';
     }
     ?>     
     <br>
-    <input type="submit" class="btn btn-block btn-outline-dark" value="Submit">
-</div>
+    <input type="button" class="btn btn-block btn-outline-dark m-3" value="Submit" onclick="verifySubmit()">
+  </div>
 </form>
-	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-  <script>
-  function onSubmit() {
-    if(confirm('Are you sure?')) {
-      return true;
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="jquery.time-to.min.js"></script>
+<link rel="stylesheet" type="text/css" href="timeTo.css" />
+<script>
+  $(document).ready(function() {
+    window.history.pushState(null, "", window.location.href);        
+    window.onpopstate = function() {
+      window.history.pushState(null, "", window.location.href);
+    };
+  });
+  let switchCount=1;
+  $(window).blur(function() {
+    if(switchCount==3) {
+      submitTest();
     } else {
-      return false;
+      alert(`Warning ${switchCount}: Do not switch to other tabs!`);
+      switchCount++;
     }
+  });
+
+  if (window.performance) {
+    console.info("window.performance works fine on this browser");
   }
-  </script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-  </body>
+  if (performance.navigation.type == 1) {
+  // submitTest();
+} else {
+  console.info( "This page is not reloaded");
+}
+$('#countdown').timeTo({
+  countdownAlertLimit:5,
+  seconds:2000,
+  theme: "black",
+  fontSize: 38,
+  displayHours:false,
+  callback:submitTest
+});
+function verifySubmit() {
+  $("#overlay").show();
+}
+function cancel() {
+  $("#overlay").hide();
+}
+function submitTest() {
+  $("form").submit();
+}
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
 </html> 
