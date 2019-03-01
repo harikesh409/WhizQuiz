@@ -24,14 +24,14 @@
 	?>
 	<div class="container ">
 		<div class="row justify-content-md-center">
-			<div class="card-wrapper">
+			<div>
 				<div class="card fat">
 					<div class="card-body">
 						<h2 class="card-title text-center">Instructions</h2>
 						<ul style="font-size: 20px;">
 							<li>Total time for the quiz is 	</li>
 							<li>Do not switch between tabs.</li>
-							<li>Switching tabs intentionally/unintentionally will get you disqualified.</li>
+							<li>Switching tabs 3 times intentionally/unintentionally will get you disqualified.</li>
 							<li>Refreshing the page will submit your quiz.</li>
 						</ul>
 						<button class="btn btn-outline-primary btn-block" onclick="proceed();">Proceed</button>

@@ -107,7 +107,7 @@ require_once('config.php');
     if(switchCount==3) {
       submitTest();
     } else {
-      alert(`Warning ${switchCount}: Do not switch to other tabs!`);
+      alert(`Warning ${switchCount}: Do not switch to other tabs! Another ${3-switchCount} tries will get you disqualified.`);
       switchCount++;
     }
   });
@@ -116,12 +116,12 @@ require_once('config.php');
     console.info("window.performance works fine on this browser");
   }
   if (performance.navigation.type == 1) {
-  // submitTest();
+   submitTest();
 } else {
   console.info( "This page is not reloaded");
 }
 $('#countdown').timeTo({
-  countdownAlertLimit:5,
+  countdownAlertLimit:60,
   seconds:2000,
   theme: "black",
   fontSize: 38,

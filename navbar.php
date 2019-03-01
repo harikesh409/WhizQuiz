@@ -9,15 +9,15 @@
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<ul class="navbar-nav mr-auto">
 			<li class="nav-item active">
-				<a class="nav-link" href="index.php">Home<span class="sr-only">(current)</span></a>
+				<h4 class='text-white current'>Lendi Institute of Engineering and Technology</h4>
 			</li>
 		</ul>
 	</div>
+	<img src="images/csi.png" alt="CSI" width="50" height="50">
 	<?php
 	session_start();
 	if(isset($_SESSION['email'])) {
 		echo "<a class='btn btn-outline-success m-2 my-sm-0' href='logout.php'>Log Out</a>";
 	}
 	?>
-	<img src="images/csi.png" alt="CSI" width="50" height="50">
 </nav>
