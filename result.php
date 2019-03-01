@@ -29,8 +29,9 @@ $score = 0;
 foreach($_POST as $key => $value){
 	$question = str_split($key);
 	// echo $question[1] . " : " . $value . "<br />\r\n";
-	if(!strcmp($value, $answers[$question[1]])) {
+	if( !strcmp(strtolower(trim($value)), strtolower(trim($answers[$question[1]]))) ) {
 		$score++;
+	
 	}
 }
 $email = $_SESSION['email'];

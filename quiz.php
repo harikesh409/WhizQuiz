@@ -33,8 +33,8 @@ require_once('config.php');
       <div class="card-body">
         <h3>Are you sure?</h3>
         <div class="p-3">
-          <button class="btn btn-secondary" onclick="cancel()">Cancel</button>
-          <button class="btn btn-primary" onclick="submitTest()">Damn Sure</button>
+          <button class="btn btn-secondary" onclick="cancel()">Nope</button>
+          <button class="btn btn-primary" onclick="submitTest()">Damn Sure!</button>
         </div>
       </div>
     </div>
@@ -62,23 +62,23 @@ require_once('config.php');
       echo "<h5 class='card-title'>".$i++.". ".$row['question']."</h5>";
       echo "<div class='row'>";
       echo "<div class='col-6 inputGroup'>";
-      echo "<input type='radio' name='q".$row['qid']."' id='".$row['qid']."q1' value=".$row['option1'].">";
+      echo "<input type='radio' name='q".$row['qid']."' id='".$row['qid']."q1' value='".$row['option1']."''>";
       echo "<label for='".$row['qid']."q1' class='ml-2'>".$row['option1']."</label>";
         // echo "<br>";
       echo "</div>";
       echo "<div class='col-6 inputGroup'>";
-      echo "<input type='radio' name='q".$row['qid']."' id='".$row['qid']."q2' value=".$row['option2'].">";
+      echo "<input type='radio' name='q".$row['qid']."' id='".$row['qid']."q2' value='".$row['option2']."''>";
       echo "<label for='".$row['qid']."q2' class='ml-2'>".$row['option2']."</label>";
         // echo "<br>";
       echo "</div></div>";
       echo "<div class='row'>";
       echo "<div class='col-6 inputGroup'>";
-      echo "<input type='radio' name='q".$row['qid']."' id='".$row['qid']."q3' value=".$row['option3'].">";
+      echo "<input type='radio' name='q".$row['qid']."' id='".$row['qid']."q3' value='".$row['option3']."''>";
       echo "<label for='".$row['qid']."q3' class='ml-2'>".$row['option3']."</label>";
         // echo "<br>";
       echo "</div>";
       echo "<div class='col-6 inputGroup'>";
-      echo "<input type='radio' name='q".$row['qid']."' id='".$row['qid']."q4' value=".$row['option4'].">";
+      echo "<input type='radio' name='q".$row['qid']."' id='".$row['qid']."q4' value='".$row['option4']."''>";
       echo "<label for='".$row['qid']."q4' class='ml-2'>".$row['option4']."</label>";
       echo "</div></div>";
         // echo "<br>";
@@ -122,7 +122,7 @@ require_once('config.php');
 }
 $('#countdown').timeTo({
   countdownAlertLimit:60,
-  seconds:2000,
+  seconds: 20 * 60,
   theme: "black",
   fontSize: 38,
   displayHours:false,

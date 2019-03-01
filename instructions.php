@@ -29,7 +29,7 @@
 					<div class="card-body">
 						<h2 class="card-title text-center">Instructions</h2>
 						<ul style="font-size: 20px;">
-							<li>Total time for the quiz is 	</li>
+							<li>Total time for the quiz is 20 mins</li>
 							<li>Do not switch between tabs.</li>
 							<li>Switching tabs 3 times intentionally/unintentionally will get you disqualified.</li>
 							<li>Refreshing the page will submit your quiz.</li>
