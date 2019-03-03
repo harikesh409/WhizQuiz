@@ -33,6 +33,8 @@
 							<li>Do not switch between tabs.</li>
 							<li>Switching tabs 3 times intentionally/unintentionally will get you disqualified.</li>
 							<li>Refreshing the page will submit your quiz.</li>
+							<li>Press F11 to enter into full screen and start the quiz.
+							</li>
 						</ul>
 						<button class="btn btn-outline-primary btn-block" onclick="proceed();">Proceed</button>
 					</div>
