@@ -1,6 +1,7 @@
 <?php
 require_once('config.php');
 session_start();
+
 $email = $_POST['email'];
 $password = $_POST['password'];
 $query = "select * from users where email='$email' and password = '$password'";

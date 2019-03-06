@@ -9,7 +9,7 @@ require_once('config.php');
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/bootstrap.min.css">
   <link rel="stylesheet" href="styles.css">
   <title>User Details</title>
 </head>
@@ -41,6 +41,9 @@ require_once('config.php');
       <input type="submit" class="btn btn-outline-primary btn-block" name="submit" value="Submit">
     </form>
   </div>
+  <script src="assets/jquery-3.3.1.min.js"></script>
+  <script src="assets/popper.min.js"></script>
+  <script src="assets/bootstrap.min.js"></script>
 </body>
 </html>
 <?php
